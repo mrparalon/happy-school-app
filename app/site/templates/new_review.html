@@ -1,0 +1,47 @@
+{% extends "./base_logged_in.html" %}
+{% block main %}
+<form>
+    <label for="comment" class="block text-gray-700 text-sm font-bold mb-2">
+        Отзыв на {{ student.name}} {{ student.grage }} класса
+    </label>
+    <textarea id="comment" name="comment" rows="4"
+        class="w-full bg-gray-200 rounded-lg appearance-none border-2 border-gray-200 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+
+    </textarea>
+    <label for="engagement" class="block text-gray-700 text-sm font-bold mb-2">
+        Вовлеченность (1-5)
+    </label>
+    <input type="range" id="engagement" name="engagement" min="1" max="5"
+        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+    <div class="flex justify-between text-xs px-2">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+    </div>
+    <label for="focus" class="block text-gray-700 text-sm font-bold mb-2">
+        Внимательность (1-5)
+    </label>
+    <input type="range" id="focus" name="focus" min="1" max="5"
+        class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+    <div class="flex justify-between text-xs px-2">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+    </div>
+    <div class="flex items-center justify-between mt-4">
+        <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+            hx-post="/students/{{ student.id }}/reviews"
+            hx-swap="outerHTML"
+            hx-ext='json-enc'
+            >
+            Отправить
+        </button>
+    </div>
+</form>
+{% endblock %}

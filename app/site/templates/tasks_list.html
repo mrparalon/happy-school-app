@@ -1,0 +1,14 @@
+<div class="m-6" id="tasks_list">
+<h1 class="text-2xl font-bold mb-4">Tasks</h1>
+<!--new task-->
+<form hx-post="/tasks" hx-target="#tasks_list" hx-swap="outerHTML" class="flex flex-row">
+    <input type="text" name="title" placeholder="New task" class="px-4 py-2 w-full border-2 border-r-0 border-slate-200">
+    <button type="submit" class="bg-lime-700 px-4 py-2 text-white">Add</button>
+</form>
+<div hx-swap="outerHTML" hx-target="closest .todo-item">
+{% for task in tasks %}
+<div class="todo-item w-full p-4">
+    {% include 'task.html' %}
+</div>
+{% endfor %}
+</div>

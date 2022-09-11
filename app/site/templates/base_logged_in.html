@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+<!--base layout for package-->
+<!--- header with home and logout buttons-->
+<!--- content-->
+<!--- footer-->
+{% block content %}
+<header class="flex justify-between items-center py-4 px-6 bg-gray-300">
+    <div class="flex items-center">
+        <div class="relative mx-4 lg:mx-0">
+            <div>
+                <a href="/logout" class="inline-block py-2 px-4 text-gray-900 font-bold">Logout</a>
+            </div>
+
+        </div>
+    </div>
+</header>
+<div class="p-10">
+{% block main %}{% endblock %}
+</div>
+
+{% endblock %}

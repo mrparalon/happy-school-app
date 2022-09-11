@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "happy_school_bot"
+version = "0.1.0"
+description = ""
+authors = ["Aleksei Sherchenkov mr.paralon@gmail.com"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.23.0"
+pydantic = "^1.10.2"
+Telethon = "^1.25.4"
+pypng = "^0.20220715.0"
+edgedb = "^1.1.0"
+qrcode = {version = "^7.3.1", extras = ["pil"]}
+orjson = "^3.8.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.10.0"
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

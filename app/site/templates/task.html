@@ -1,0 +1,9 @@
+<!--tailwind flex-->
+<div class="flex flex-row">
+    <button hx-post="/tasks/{{task.id}}/done" class="{% if task.done %} bg-lime-700 {% else %} bg-slate-200 {% endif %}
+        rounded-full w-6 h-6 mr-4"></button>
+    <p class="{% if task.done %} line-through decoration-black text-slate-500 {% endif %}">
+        {{ task.title }}
+    </p>
+    <button hx-delete="/tasks/{{task.id}}" class="bg-red-500 px-4 py-2 text-white">Delete</button>
+</div>

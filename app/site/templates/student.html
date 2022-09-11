@@ -1,0 +1,82 @@
+{% extends "base_logged_in.html" %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+{% block main %}
+<div>
+    <h1>{{ student.name }} {{student.grade}}</h1>
+
+    <h2>Reviews</h2>
+    <table class="table-auto">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Comment</th>
+                <th class="px-4 py-2">Engagement</th>
+                <th class="px-4 py-2">Focus</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+            <tr>
+                <td class="border px-4 py-2">{{ review.comment | truncate(100) }}</td>
+                <td class="border px-4 py-2">{{ review.engagement }}</td>
+                <td class="border px-4 py-2">{{ review.focus }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="width: 800px;"><canvas id="reviews"></canvas></div>
+    <script type="module">
+        (async function () {
+            const data = {{reviews_json | safe
+        }}
+
+        let datasets = [
+            {
+                label: 'Engagement',
+                data: data.map(row => row.engagement),
+                fill: false,
+                borderColor: 'rgb(50, 92, 92)',
+                tension: 0.1
+            },
+            {
+                label: 'Focus',
+                data: data.map(row => row.focus),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }
+
+        ]
+
+
+        new Chart(
+            document.getElementById('reviews'),
+            {
+                type: 'line',
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Chart.js Line Chart'
+                        }
+                    }
+                },
+                data: {
+                    labels: data.map(row => Date.parse(row.created_at)),
+                    datasets: datasets
+                }
+            }
+        );
+        }) ();
+
+
+    </script>
+
+</div>
+
+{% endblock %}

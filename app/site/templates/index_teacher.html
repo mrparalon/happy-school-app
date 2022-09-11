@@ -1,0 +1,40 @@
+{% extends "base_logged_in.html" %}
+{% block main %}
+<!--Should have -->
+<!--button "Leave student review"-->
+<!--list of all students-->
+<div>
+    <a href="/new-review" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Leave student review
+    </a>
+</div>
+<div>
+    <table class="table-auto">
+        <thead>
+            <tr>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Grade</th>
+                <th class="px-4 py-2">Latest review</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td class="border px-4 py-2">{{ student.name }}</td>
+                <td class="border px-4 py-2">{{ student.grade }}</td>
+                <td class="border px-4 py-2">
+                    {% if student.latest_review %}
+                    <a href="/review/{{ student.latest_review.id }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        View
+                    </a>
+                    {% else %}
+                    <a href="/students/{{ student.id }}/new-review" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Оставить отзыв
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</div>
+{% endblock %}
